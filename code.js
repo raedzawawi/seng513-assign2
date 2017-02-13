@@ -17,6 +17,7 @@ function getStats(txt) {
     };
 }
 
+// Transform text to an array of strings with no special characters
 function getWordArray(str) {
     return str.toLowerCase().replace(/[\W_]/g, " ").trim().split(/\s+/);
 }
@@ -104,25 +105,21 @@ function getLongestWords(str) {
     }
 }
 
+// Sort array by length and break ties with alphabetical order
 function getSortedArray(ar) {
     return ar.sort(function(a,b) {
         return b.length - a.length || a.localeCompare(b);
     });
 }
 
+// Check whether the array is empty or not
 function isEmpty(arr) {
     return arr.length === 1 && arr[0] === "";
 }
 
-function getTenPairs(darr) {
-    return darr.sort(
-        function(a,b) {
-            return b.count - a.count || a.word.localeCompare(b.word);
-        }).slice(0,10);
-}
-
 // Part 9: Get a list of most frequent words
 function getFrequentWords(str) {
+    // Sort Array alphabetically
     var wordArr = getWordArray(str).sort();
     var words = [];
     var pairs = [];
@@ -137,6 +134,7 @@ function getFrequentWords(str) {
                 freq++;
             } else {
                 pairs.push({word: check, count: freq})
+                // Reset the counter
                 check = wordArr[i];
                 freq = 1;
             }
@@ -144,6 +142,7 @@ function getFrequentWords(str) {
         pairs.push({word: check, count: freq}); 
 
         var tenPairs = getTenPairs(pairs);
+        console.log(tenPairs);
         var finalArray = [];
         for (i = 0; i < tenPairs.length; i++) {
             finalArray.push(tenPairs[i].word + '(' + tenPairs[i].count + ')');
@@ -152,4 +151,12 @@ function getFrequentWords(str) {
         return finalArray;
 
     }
+}
+
+// Return ten pairs of most re-ocurring words
+function getTenPairs(darr) {
+    return darr.sort(
+        function(a,b) {
+            return b.count - a.count || a.word.localeCompare(b.word);
+        }).slice(0,10);
 }
