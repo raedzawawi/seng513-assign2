@@ -1,1 +1,2 @@
-# seng513-assign2
+# SENG 513 - Assignment 2
+Name: Raed Zawawi
